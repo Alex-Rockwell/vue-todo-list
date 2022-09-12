@@ -7,7 +7,7 @@
           <h2 class="modal__title">Создать новую задачу</h2>
           <div class="modal__input-box">
             <label for="" class="modal__label">Описание</label>
-            <input type="text" class="modal__input" placeholder="Введите описание" v-model="newItemDescription">
+            <input type="text" class="modal__input" placeholder="Введите описание" v-model="newItemDescription" ref="input">
           </div>
           <div class="modal__btn-box">
             <button type="submit" class="modal__btn">Создать</button>
@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { onUpdated, ref } from 'vue';
 import { useListItemsStore } from "../stores/listItemsStore";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -65,6 +65,12 @@ const emit = defineEmits(["closeModal"]);
 function close() {
   emit("closeModal");
 }
+
+let input = ref()
+
+onUpdated(() => {
+  input.value.focus()
+})
 
 </script>
 
